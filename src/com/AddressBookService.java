@@ -1,13 +1,18 @@
 package com;
 
 import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.ArrayList;
 
 
 public class AddressBookService {
 	
+	Scanner sc = new Scanner(System.in);	
 
-	public void addContact(List<Contact> contact) {
+	List<Contact> contacts = new ArrayList<Contact>();
+
+	
+	public void addContact() {
 
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
@@ -39,7 +44,111 @@ public class AddressBookService {
 		 * here it add the contact List which is given in console by the User
 		 */
 		Contact newContact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
-		contact.add(newContact);
+		contacts.add(newContact);
+		
+	}
+	public Contact findContact() {                                         //to find the contacts
+		System.out.println("\n Enter the first name of the contact to edit: ");
+		String name = sc.next();
+		int duplicate = 0;                                                   //will increment the duplicate if found multiple contacts with same name
+		Contact temp = null;
+		for (Contact contact : contacts) {
+			if (contact.getFirstName().equals(name)) {
+				duplicate++;
+				temp = contact;
+			}
+		}
+		if (duplicate == 1) {
+			return temp;
+
+		} else if( duplicate > 1) {
+			System.out.print(" There are multiple contacts with given name.\n Please enter their email id: ");
+			String email = sc.next();
+			for (Contact contact : contacts) {
+				if (contact.getFirstName().equals(name) && contact.getEmail().equals(email)) {
+					return contact;
+				}
+			}
+		}
+		else{
+			System.out.println("No contact with the given first name. Please enter the correct first name");
+			findContact();
+		}
+		return temp;
+	} 
+		
+		public void editContact() {
+
+			Contact contact = findContact();
+
+			System.out.println("Enter your choice to edit: " + "\n 1.Edit first name" + "\n 2.Edit last name"
+					+ "\n 3.Edit address" + "\n 4.Edit city" + "\n 5.Edit state" + "\n 6.Edit zipcode"
+					+ "\n 7.Edit phone number"  + "\n 8.Edit email");
+
+			int choice = sc.nextInt();                                 //with the help of setters setting the new details
+			switch (choice) {
+			case 1:
+				System.out.println("Enter new first name");
+				String newFirstName = sc.next();
+				contact.setFirstName(newFirstName);
+				System.out.println("new first name updated");
+
+				break;
+			case 2:
+				System.out.println("Enter new last name");
+				String newLastName = sc.next();
+				contact.setLastName(newLastName);
+				System.out.println("new last name updated");
+
+				break;
+			case 3:
+				System.out.println("Enter new address");
+				String newAddress = sc.next();
+				contact.setAddress(newAddress);
+				System.out.println("new newaddress updated");
+
+				break;
+			case 4:
+				System.out.println("Enter new city");
+				String newCity = sc.next();
+				contact.setCity(newCity);
+				System.out.println("new city updated");
+
+				break;
+			case 5:
+				System.out.println("Enter new state");
+				String newState = sc.next();
+				contact.setState(newState);
+				System.out.println("new state updated");
+
+				break;
+			case 6:
+				System.out.println("Enter new zip code");
+				int newZipCode = sc.nextInt();
+				contact.setZip(newZipCode);
+				System.out.println("new zip code updated");
+				break;
+				
+			case 7:
+				System.out.println("Enter new phone number");
+				String newPhoneNumber = sc.next();
+				contact.setPhoneNumber(newPhoneNumber);
+				System.out.println("new phone number updated");
+
+				break;
+				
+			case 8:
+				System.out.println("Enter new email");
+				String newEmail = sc.next();
+				contact.setEmail(newEmail);
+				System.out.println("new email updated");
+
+				break;
+
+			default:
+				System.out.println("Please enter a number between 1 to 8 only...");
+				break;
+			}
 
 	}
 }
