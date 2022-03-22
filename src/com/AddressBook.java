@@ -29,7 +29,7 @@ public class AddressBook {
 		
 		addnew.addContact();  
 		while (true) {
-			System.out.println("Enter your choice:\n 1. Add Contact\n 2. Edit Contact 4. Exit ");
+			System.out.println("Enter your choice:\n 1. Add Contact\n 2. Edit Contact \n 3. Display Contacts  \n 4. Delete Contact\n 5. Exit  ");
 			int choice= sc.nextInt();
 			switch (choice) {
 			case 1:
@@ -44,6 +44,16 @@ public class AddressBook {
 				break;
 				
 			case 3:
+				System.out.println("The contacts in the Address Book are ");
+				addnew.displayContact();
+				break;
+				
+			case 4: 
+				System.out.println("Enter contact detais to delete: ");
+				addnew.deleteContact();
+				break;
+
+			case 5:
 				System.out.println("Exit : ");
 				sc.close();
 				return;

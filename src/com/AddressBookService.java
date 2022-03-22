@@ -47,10 +47,14 @@ public class AddressBookService {
 		contacts.add(newContact);
 		
 	}
-	public Contact findContact() {                                         //to find the contacts
+	/**
+	 * to find the contact using duplicate 
+	 * @return
+	 */
+	public Contact findContact() {                                       
 		System.out.println("\n Enter the first name of the contact to edit: ");
 		String name = sc.next();
-		int duplicate = 0;                                                   //will increment the duplicate if found multiple contacts with same name
+		int duplicate = 0;                                                
 		Contact temp = null;
 		for (Contact contact : contacts) {
 			if (contact.getFirstName().equals(name)) {
@@ -77,6 +81,10 @@ public class AddressBookService {
 		return temp;
 	} 
 		
+	/**
+	 * Edit the contact by findContact()
+	 * and after finding we may edit the existing contact with new Value
+	 */
 		public void editContact() {
 
 			Contact contact = findContact();
@@ -85,7 +93,7 @@ public class AddressBookService {
 					+ "\n 3.Edit address" + "\n 4.Edit city" + "\n 5.Edit state" + "\n 6.Edit zipcode"
 					+ "\n 7.Edit phone number"  + "\n 8.Edit email");
 
-			int choice = sc.nextInt();                                 //with the help of setters setting the new details
+			int choice = sc.nextInt();                                
 			switch (choice) {
 			case 1:
 				System.out.println("Enter new first name");
@@ -149,6 +157,26 @@ public class AddressBookService {
 				System.out.println("Please enter a number between 1 to 8 only...");
 				break;
 			}
+			System.out.println("The updated contact is  : " + contact);
+		}
+			
+			public void displayContact() {                                                       
+				System.out.println(contacts);
+		}
+			/**
+			 * delete the Contact by findContact()
+			 * 
+			 */
+			public void deleteContact() {                                                                      
+				Contact contact = findContact();
+				if (contact == null) {
+					System.out.println("No contact found with the given name");
+					return;
+				}
+				contacts.remove(contact);                                                                     
+				System.out.println("The contact is deleted from the Address Book");
+			}
 
-	}
+
+	
 }
