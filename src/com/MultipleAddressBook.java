@@ -98,7 +98,7 @@ public class MultipleAddressBook {
 			System.out.println(i);
 			System.out.println(addressBookMap.get(i).contacts);                     
 		}
-		System.out.println(" ");
+		
 	}
 
 }

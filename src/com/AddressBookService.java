@@ -10,6 +10,22 @@ public class AddressBookService {
 	Scanner sc = new Scanner(System.in);	
 
 	List<Contact> contacts = new ArrayList<Contact>();
+	/**
+	 * Check that no duplicate entry for the Address Book
+	 * if first name equals the given name mean, it display Name already exist 
+	 * or else it add to the contactDetails
+	 */
+	
+	public void duplicateCheck() {  
+		System.out.print(" Please enter the first name: ");
+		String name = sc.next();
+		for(Contact i : contacts) {
+		   if(i.getFirstName().equals(name)) {
+			   System.out.println(" Given name already exist");
+			   return;
+		   } 
+        }  addContactDetails();
+	}
 	
 	/**
 	 * adding Multiple Contact Details from the  User
