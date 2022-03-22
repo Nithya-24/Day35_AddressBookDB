@@ -10,9 +10,21 @@ public class AddressBookService {
 	Scanner sc = new Scanner(System.in);	
 
 	List<Contact> contacts = new ArrayList<Contact>();
-
 	
-	public void addContact() {
+	/**
+	 * adding Multiple Contact Details from the  User
+	 */
+	
+	public void addContact() {                                                           
+		System.out.println("Enter the number of contacts you want to enter");
+        int number = sc.nextInt();
+        for (int i = 0; i < number; i++) {
+            System.out.println("Enter the contact details of person ");
+            addContactDetails();
+        }
+	}
+	
+	public void addContactDetails() {
 
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(System.in);
