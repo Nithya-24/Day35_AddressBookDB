@@ -19,9 +19,17 @@ public class AddressBook {
 		/**
 		 * Adding a new Contact to the Address Book
 		 */
-		contact.add(newContact);                                                                                          
+		// contact.add(newContact); 
 		
+		/**
+		 * Creating Object to access the class
+		 **/
+		 
+		AddressBookService addnew = new AddressBookService(); 
+		
+		addnew.addContact(contact);  
 		System.out.println(contact);
+		
 	}
 
 }
