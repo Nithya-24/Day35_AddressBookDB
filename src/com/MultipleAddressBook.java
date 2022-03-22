@@ -1,6 +1,8 @@
 package com;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -100,5 +102,28 @@ public class MultipleAddressBook {
 		}
 		
 	}
+public void searchByCity() {
+		
+		System.out.println("Enter the name of the City to get the persons : ");
+		Scanner scanner = new Scanner(System.in);
+		String cityName = scanner.next();
+		for (String i : addressBookMap.keySet()) {
+		List<Contact>	arr = addressBookMap.get(i).contacts;
+		arr.stream().filter(person -> person.getCity().equals(cityName)).forEach(person -> System.out.println(person.getFirstName()));
+      }		
+    }
 
+      /**
+  	 	* In this method we are searching the person by the state
+  	 	**/
+public void searchByState() {
+	
+	System.out.println("Enter the name of the State to the get persons : ");
+	Scanner scanner = new Scanner(System.in);
+	String stateName = scanner.next();
+	for (String i : addressBookMap.keySet()) {
+	List<Contact>	arr = addressBookMap.get(i).contacts;
+	arr.stream().filter(person -> person.getState().equals(stateName)).forEach(person -> System.out.println(person.getFirstName()));
+  }
+}
 }
