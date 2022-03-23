@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class MultipleAddressBook {
-	Map<String, AddressBookService> addressBookMap = new HashMap<>();  
+	Map<String, AddressBookService> addressBookMap = new HashMap<>(); 
+	List<Contact> contacts = new ArrayList<Contact>();
+	Scanner scanner = new Scanner(System.in);
 	/**
 	 * Adding my Address Book
 	 */
@@ -138,4 +140,15 @@ public class MultipleAddressBook {
 	}
 
 }
+	public void countPeopleByRegion(HashMap<String, ArrayList<Contact>> listToDisplay) {
+
+		System.out.println("Enter the name of the region :");
+		String regionName = scanner.next();
+		long countPeople = listToDisplay.values().stream()
+				.map(region -> region.stream().filter(person -> person.getState().equals(regionName) || person.getCity().equals(regionName)))
+				.count();
+					
+		System.out.println("Number of People residing in " + regionName+" are: "+countPeople+"\n");
+		
+	   }
 }
