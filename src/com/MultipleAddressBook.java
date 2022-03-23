@@ -102,7 +102,7 @@ public class MultipleAddressBook {
 		}
 		
 	}
-public void searchByCity() {
+	public void searchByCity() {
 		
 		System.out.println("Enter the name of the City to get the persons : ");
 		Scanner scanner = new Scanner(System.in);
@@ -114,9 +114,9 @@ public void searchByCity() {
     }
 
       /**
-  	 	* In this method we are searching the person by the state
+  	 	* In this method, searching the person by the state
   	 	**/
-public void searchByState() {
+	public void searchByState() {
 	
 	System.out.println("Enter the name of the State to the get persons : ");
 	Scanner scanner = new Scanner(System.in);
@@ -125,5 +125,17 @@ public void searchByState() {
 	List<Contact>	arr = addressBookMap.get(i).contacts;
 	arr.stream().filter(person -> person.getState().equals(stateName)).forEach(person -> System.out.println(person.getFirstName()));
   }
+}
+
+	public void displayPeopleByRegion(HashMap<String, ArrayList<Contact>> addressBookMap) {
+	List<Contact> contacts;
+	for (String name : addressBookMap.keySet()) {
+		System.out.println("Person is residing in: " + name);
+		contacts = addressBookMap.get(name);
+		for (Contact contact : contacts) {
+			System.out.println(contact);
+		}
+	}
+
 }
 }

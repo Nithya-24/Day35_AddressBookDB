@@ -11,18 +11,6 @@ public class Contact {
 		private String phoneNumber;
 		private String email;
 
-		public Contact(String firstName, String lastName, String address, String city, String state, int zip,      
-				String phoneNumber, String email) {
-			super();
-			this.firstName = firstName;
-			this.lastName = lastName;
-			this.address = address;
-			this.city = city;
-			this.state = state;
-			this.zip = zip;
-			this.phoneNumber = phoneNumber;
-			this.email = email;
-		}
 		
 		/**
 		 * getting an Input using getter, Setter method for accessing the Variable

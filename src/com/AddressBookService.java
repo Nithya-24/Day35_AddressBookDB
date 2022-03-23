@@ -16,6 +16,11 @@ public class AddressBookService {
 	 * or else it add to the contactDetails
 	 */
 	
+	Map<String, AddressBookService> addressBookMap = new HashMap<>(); 
+	public static HashMap<String, ArrayList<Contact>> personByCity  = new HashMap<String, ArrayList<Contact>>();
+	public static HashMap<String, ArrayList<Contact>> personByState = new HashMap<String, ArrayList<Contact>>();
+	Contact person = new Contact();
+	
 	public void duplicateCheck() {  
 		System.out.print(" Please enter the first name: ");
 		String name = sc.next();
@@ -71,8 +76,17 @@ public class AddressBookService {
 		/**
 		 * here it add the contact List which is given in console by the User
 		 */
-		Contact newContact = new Contact(firstName, lastName, address, city, state, zip, phoneNumber, email);
-		contacts.add(newContact);
+		person.setFirstName(firstName);
+		person.setLastName(lastName);
+		person.setPhoneNumber(phoneNumber);
+		person.setEmail(email);
+		person.setCity(city);
+		person.setState(state);
+		person.setZip(zip);
+		addPersonToCity(person);
+		addPersonToState(person);
+		
+		contacts.add(person);
 		
 	}
 	/**
@@ -204,7 +218,34 @@ public class AddressBookService {
 				contacts.remove(contact);                                                                     
 				System.out.println("The contact is deleted from the Address Book");
 			}
+			
+			
+			public void addPersonToCity(Contact contact) {
+				if (personByCity.containsKey(contact.getCity())) {
+					personByCity.get(contact.getCity()).add(contact);
+				}
+				else {
+					ArrayList<Contact> cityList = new ArrayList<Contact>();
+					cityList.add(contact);
+					personByCity.put(contact.getCity(), cityList);
+				}
+			}
 
+
+			/**
+			 *  In this method we are checking the person by state
+			 * @param contact- We are parsing the contact there
+			 */
+			public void addPersonToState(Contact contact) {
+				if (personByState.containsKey(contact.getState())) {			
+					personByState.get(contact.getState()).add(contact);
+				}
+				else {
+					ArrayList<Contact> stateList = new ArrayList<Contact>();
+					stateList.add(contact);
+					personByState.put(contact.getState(), stateList);
+				}
+			}
 
 	
 }
