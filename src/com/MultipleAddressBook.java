@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.Iterator;
 
 public class MultipleAddressBook {
 	Map<String, AddressBookService> addressBookMap = new HashMap<>(); 
@@ -151,4 +153,20 @@ public class MultipleAddressBook {
 		System.out.println("Number of People residing in " + regionName+" are: "+countPeople+"\n");
 		
 	   }
+	
+	public void sortAddressBook() {
+		for (String i : addressBookMap.keySet()) {
+			 Map<String, Contact> con = (Map<String, Contact>) addressBookMap.get(i).contacts;
+			
+			List<Contact> sorted = con.values().stream().sorted((firstperson, secondperson) -> 
+			firstperson.getFirstName().compareTo(secondperson.getFirstName())).collect(Collectors.toList());
+			
+			System.out.println("------ Sorted Address Book ------");
+			Iterator iterator = sorted.iterator();
+			while (iterator.hasNext()) {
+				System.out.println(iterator.next());
+				System.out.println();
+			}
+		}
+	}
 }
