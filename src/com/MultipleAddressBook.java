@@ -1,6 +1,8 @@
+
 package com;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -153,6 +155,7 @@ public class MultipleAddressBook {
 		System.out.println("Number of People residing in " + regionName+" are: "+countPeople+"\n");
 		
 	   }
+	/**
 	
 	public void sortAddressBook() {
 		for (String i : addressBookMap.keySet()) {
@@ -161,7 +164,7 @@ public class MultipleAddressBook {
 			List<Contact> sorted = con.values().stream().sorted((firstperson, secondperson) -> 
 			firstperson.getFirstName().compareTo(secondperson.getFirstName())).collect(Collectors.toList());
 			
-			System.out.println("------ Sorted Address Book ------");
+			System.out.println(" Sorted Address Book");
 			Iterator iterator = sorted.iterator();
 			while (iterator.hasNext()) {
 				System.out.println(iterator.next());
@@ -169,4 +172,52 @@ public class MultipleAddressBook {
 			}
 		}
 	}
+	**/
+	public void sortAddressBook(){
+        List<Contact> sortedContactList;
+        for (String name : addressBookMap.keySet()) {
+            List<Contact> contactList = (List<Contact>) addressBookMap.get(name);
+            @SuppressWarnings("unchecked")
+			int sortingChoice = ScannerUtil.getInt("Sort by\n 1.First Name\n 2.City\n 3.State \n4.Zip");
+            switch (sortingChoice) {
+                case 1: {
+                    sortedContactList = contactList.stream()
+                            .sorted(Comparator.comparing(Contact::getFirstName))
+                            .collect(Collectors.toList());
+                    printSortedList(sortedContactList);
+                }
+                case 2: {
+                    sortedContactList = contactList.stream()
+                            .sorted(Comparator.comparing(Contact::getCity))
+                            .collect(Collectors.toList());
+                    printSortedList(sortedContactList);
+                }
+                case 3: {
+                    sortedContactList = contactList.stream()
+                            .sorted(Comparator.comparing(Contact::getState))
+                            .collect(Collectors.toList());
+                    printSortedList(sortedContactList);
+                }
+                case 4: {
+                    sortedContactList = contactList.stream()
+                            .sorted(Comparator.comparing(Contact::getZip))
+                            .collect(Collectors.toList());
+                    printSortedList(sortedContactList);
+                }
+            }
+
+        }
+    }
+
+    /**
+     * printSortedList - method to print contacts in addressBook
+     *
+     * @param sortedContactList - address book that is to be printed
+     */
+    public void printSortedList(List<Contact> sortedContactList) {
+        for (Contact contact : sortedContactList) {
+            System.out.println(contact);
+            System.out.println();
+        }
+    }
 }

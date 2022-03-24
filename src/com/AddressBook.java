@@ -1,17 +1,20 @@
 package com;
 
-import java.util.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
 
 public class AddressBook {
 	
-	public static void main(String[] args) {
-
-		System.out.println("Address Book");
+	
 		/**
 		 * creating an array list to store the Address
 		 */
+		public void address() {
 
-		List<Contact> contact = new ArrayList<>();                                  
+		                             
 		
 	//	Contact newContact = new Contact("Nithya", "R", "Satchiyapuram Road", "Sivakasi", "TamilNadu", 626130, "9876543210", "nithyaramadoz@gmail.com");                                                                       // created a object
 		
@@ -82,12 +85,56 @@ public class AddressBook {
 			case 13:
 				obj.sortAddressBook();
 				break;
-			case 0:
-				System.exit(0);
+			case 14:
+				System.exit(14);
 				break;
 			default:
 				System.out.println("Enter the wrong input");
 			}
 		}
 	}
+		
+		public static void main(String[] args) {
+
+			System.out.println("Address Book");
+			Scanner Scan = new Scanner(System.in);
+
+			/**
+			 * try and catch block will be uses to handle exception
+			 */
+			try {
+				@SuppressWarnings("resource")
+				InputStream inputStream = new FileInputStream(
+						"D:\\Users\\eclipse-workspace\\Day24");
+				int byteData = inputStream.read();
+				if (byteData != -1) {
+					System.out.println(byteData);
+				}
+			} catch (IOException e2) {
+				
+			}
+
+			/**
+			 * try and catch block will be uses to handle exception if file is created then
+			 * it will check it is exist or not if exist then display file successfully
+			 * created otherwise catch exception
+			 */
+			File file = new File(
+					"D:\\Users\\eclipse-workspace\\Day24");
+			try {
+				boolean isFileCreated = file.createNewFile();
+				if (isFileCreated) {
+					System.out.println("File Created successfully!!1");
+				} else {
+					System.out.println("File already exist");
+				}
+			} catch (IOException e) {
+				
+			}
+			AddressBook addressBookMain = new AddressBook();
+
+			
+			addressBookMain.address();
+		
+		}
 }
