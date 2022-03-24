@@ -131,10 +131,10 @@ public class AddressBook {
 			} catch (IOException e) {
 				
 			}
-			AddressBook addressBookMain = new AddressBook();
+			AddressBook addressBook = new AddressBook();
 
 			
-			addressBookMain.address();
+			addressBook.address();
 		
 		}
 }
