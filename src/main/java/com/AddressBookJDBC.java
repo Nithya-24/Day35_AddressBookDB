@@ -1,5 +1,6 @@
 package com;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +11,7 @@ public class AddressBookJDBC {
 
         boolean exit = false;
         while (!exit) {
-        	  System.out.println(" Press\n 1 ->  Retrieve data\n 2 -> Update Address,city,state,zip  by FirstName\n 3 -> exit");
+        	  System.out.println(" Press\n 1 ->  Retrieve data\n 2 -> Update Address by Name\n 3 -> Retrieve data for particular Period\n 4 -> Exit\n ");
               int choice = scanner.nextInt();
               switch (choice) {
                   case 1:
@@ -20,6 +21,9 @@ public class AddressBookJDBC {
                       updateAddress();
                       break;
                   case 3:
+                      reteriveDataForParticularDate();
+                      break;
+                  case 4:
                       exit = true;
               }
           }
@@ -37,5 +41,16 @@ public class AddressBookJDBC {
         System.out.println("Enter the address and FirstName  to Update");
         addressBookRepo.updateCityByFirstName(scanner.next(), scanner.next());
     
-}
+    }
+    
+    private static void reteriveDataForParticularDate() {
+        AddressBookRepo addressBookRepo = new AddressBookRepo();
+        System.out.println("Enter the Date of Joining (YYYY-MM-DD");
+        System.out.println("Enter year , month and Day");
+        List<Contacts> employeeInfoList = addressBookRepo.findAllForParticularDate(LocalDate.of(scanner.nextInt(), scanner.nextInt(), scanner.nextInt()));
+        for (Contacts employee : employeeInfoList
+        ) {
+            System.out.println(employee + "\n");
+        }
+    }
 }

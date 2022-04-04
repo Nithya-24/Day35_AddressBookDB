@@ -1,5 +1,6 @@
 package com;
 
+import java.time.LocalDate;
 
 public class Contacts {
 
@@ -11,10 +12,8 @@ public class Contacts {
     private int zip;
     private String phoneNumber;
     private String emailId;
-//    private String contactType;
-//    private LocalDate dateAdded;
-//    private String BookName;
 
+   private LocalDate dateAdded;
    
     public String getFirstName() {
         return firstName;
@@ -87,15 +86,15 @@ public class Contacts {
 //    public void setContactType(String contactType) {
 //        this.contactType = contactType;
 //    }
-//
-//    public LocalDate getDateAdded() {
-//        return dateAdded;
-//    }
-//
-//    public void setDateAdded(LocalDate dateAdded) {
-//        this.dateAdded = dateAdded;
-//    }
-//
+
+    public LocalDate getDateAdded() {
+        return dateAdded;
+    }
+
+    public void setDateAdded(LocalDate dateAdded) {
+        this.dateAdded = dateAdded;
+    }
+
 //    public String getBookName() {
 //        return BookName;
 //    }

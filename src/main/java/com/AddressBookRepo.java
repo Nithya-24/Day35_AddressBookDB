@@ -1,8 +1,10 @@
 package com;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class AddressBookRepo {
 	static final String URL = "jdbc:mysql://localhost:3306/addressbookservices";
@@ -60,7 +62,7 @@ public class AddressBookRepo {
                 contactInfo.setEmailId(resultSet.getString("email"));
 //                contactInfo.setBookName(resultSet.getString("bookName"));
 //                contactInfo.setContactType(resultSet.getString("contactType"));
-//                contactInfo.setDateAdded(resultSet.getDate("Date_added").toLocalDate());
+                contactInfo.setDateAdded(resultSet.getDate("Date_added").toLocalDate());
 
                 addressBookList.add(contactInfo);
             }
@@ -88,6 +90,36 @@ public class AddressBookRepo {
             e.printStackTrace();
         }
 
+    }
+       
+    
+    public List<Contacts> findAllForParticularDate(LocalDate date) {
+        ResultSet resultSet = null;
+        List<Contacts> addressBookList = new ArrayList<Contacts>();
+        try (Connection connection = getConnection()) {
+            Statement statement = connection.createStatement();
+            String sql = "select * from addressbook where date_added between cast(' "+ date + "'" +" as date)  and date(now());";
+            resultSet = statement.executeQuery(sql);
+            int count = 0;
+            while (resultSet.next()) {
+                Contacts contactInfo = new Contacts();
+                contactInfo.setFirstName(resultSet.getString("firstName"));
+                contactInfo.setLastName(resultSet.getString("Lastname"));
+                contactInfo.setAddress(resultSet.getString("address"));
+                contactInfo.setCity(resultSet.getString("city"));
+                contactInfo.setState(resultSet.getString("state"));
+                contactInfo.setZip(resultSet.getInt("zip"));
+                contactInfo.setPhoneNumber(resultSet.getString("phoneNumber"));
+                contactInfo.setEmailId(resultSet.getString("email"));
+              
+                contactInfo.setDateAdded(resultSet.getDate("Date_added").toLocalDate());
+
+                addressBookList.add(contactInfo);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return addressBookList;
     }
     
 }
