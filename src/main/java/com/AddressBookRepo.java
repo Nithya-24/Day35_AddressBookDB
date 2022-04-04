@@ -40,7 +40,32 @@ public class AddressBookRepo {
 	public static AddressBookRepo getInstance() {
 		return config;
 	}
-
+	  public static void insertData(Contacts add) throws SQLException {
+	        Connection connection = getConnection();
+	        try {
+	            if (connection != null) {
+	                connection.setAutoCommit(false);
+	                Statement statement = connection.createStatement();
+	                String sql = "insert into addressbook(firstname,lastname,address,city,state,zip,phoneNumber,email)" +
+	                        "values('" + add.getFirstName() + "','" + add.getLastName() + "','" + add.getAddress() + "','" + add.getCity() +
+	                        "','" + add.getState() + "','" + add.getZip() + "','" + add.getPhoneNumber() + "','" +
+	                        add.getEmailId() + "'" ;
+	                int result = statement.executeUpdate(sql);
+	                connection.commit();
+	                if (result > 0) {
+	                    System.out.println("Contact Inserted");
+	                }
+	                connection.setAutoCommit(true);
+	            }
+	        } catch (SQLException sqlException) {
+	            System.out.println("Insertion Rollbacked");
+	            connection.rollback();
+	        } finally {
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        }
+	    }
     public static List<Contacts> retrieveData() {
         ResultSet resultSet = null;
         List<Contacts> addressBookList = new ArrayList<Contacts>();
