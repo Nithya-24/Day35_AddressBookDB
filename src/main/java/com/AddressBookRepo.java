@@ -49,6 +49,7 @@ public class AddressBookRepo {
           //  int count = 0;
             while (resultSet.next()) {
                 Contacts contactInfo = new Contacts();
+               
                 contactInfo.setFirstName(resultSet.getString("firstName"));
                 contactInfo.setLastName(resultSet.getString("Lastname"));
                 contactInfo.setAddress(resultSet.getString("address"));
@@ -64,11 +65,29 @@ public class AddressBookRepo {
                 addressBookList.add(contactInfo);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+        	 e.printStackTrace();
         }
         return addressBookList;
 
     }
-    
+    /**
+     * Here Updating the AddressBook Database using FirstName
+     * @param address
+     * @param firstName
+     */
+    public void updateCityByFirstName(String address, String firstName) {
+        try (Connection connection = getConnection()) {
+            Statement statement = connection.createStatement();
+            String query = "UPDATE addressbook SET address = 'ttL' WHERE FirstName = 'XYZ' " ;
+            int result = statement.executeUpdate(query);
+            System.out.println(result);
+            if (result > 0) {
+                System.out.println("Address Updated Successfully");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
     
 }

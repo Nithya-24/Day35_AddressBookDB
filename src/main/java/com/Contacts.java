@@ -2,6 +2,7 @@ package com;
 
 
 public class Contacts {
+
     private String firstName;
     private String lastName;
     private String address;
@@ -14,7 +15,7 @@ public class Contacts {
 //    private LocalDate dateAdded;
 //    private String BookName;
 
-
+   
     public String getFirstName() {
         return firstName;
     }
@@ -105,8 +106,8 @@ public class Contacts {
 
     @Override
     public String toString() {
-        return "Contacts {" +
-                " firstName='" + firstName + '\'' +
+        return "Contacts {" + 
+        	    " firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", address='" + address + '\'' +
                 ", city='" + city + '\'' +
